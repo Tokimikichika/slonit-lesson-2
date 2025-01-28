@@ -1,26 +1,44 @@
-const computersGame = () => {
-    const secretNumber = Math.floor(Math.random() * 100) + 1;
-    console.log('Компьютер 1 загадал число от 1 до 100');
-    let low = 1;
-    let high = 100;
-    let attempts = 0;
+const mySlice = (arr, start = 0, end = arr.length) => {
+    const newArr = []
+    if (start < 0) {
+        start = arr.length + start;
+    }
+    if (end < 0) {
+        end = arr.length + end;
+    }
+    start = Math.max(0, Math.min(start, arr.length));
+    end = Math.max(0, Math.min(end, arr.length));
+    
+    for (let i = start; i < end; i++) {
+        newArr.push(arr[i]);
+    }
+    return newArr;
+};
 
-    while(true) {
-        const guess = Math.floor((low + high) / 2);
-        attempts++;
-        console.log(`Компьютер 2: Пробую число ${guess}.`);
-
-        if (guess < secretNumber) {
-            console.log("Компьютер 1: Больше.");
-            low = guess + 1;
-        } else if (guess > secretNumber) {
-            console.log("Компьютер 1: Меньше.");
-            high = guess - 1;
-        } else {
-            console.log(`Компьютер 1: Угадал! Загаданное число было ${secretNumber}.`);
-            console.log(`Количество попыток: ${attempts}`);
-            break;
+const myIndexOf = (arr, item, from = 0) => {
+    if (from < 0) {
+        from = arr.length + from;
+    }
+    from = Math.max(0, Math.min(from, arr.length));
+    
+    for (let i = from; i < arr.length; i++) {
+        if (arr[i] === item) {
+            return i;
         }
     }
+    return -1;
+};
+
+const myIncludes = (arr, item, from = 0) => {
+    if (from < 0) {
+        from = arr.length + from;
+    }
+    from = Math.max(0, Math.min(from, arr.length));
+    
+    for (let i = from; i < arr.length; i++) {
+        if (arr[i] === item) {
+            return true;
+        }
+    }
+    return false;
 }
-computersGame()
